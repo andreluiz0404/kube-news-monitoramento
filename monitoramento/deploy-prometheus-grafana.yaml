@@ -1023,7 +1023,6 @@ spec:
     configMap:
       name: grafana-test
   restartPolicy: Never
-MANIFEST:
 ---
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
