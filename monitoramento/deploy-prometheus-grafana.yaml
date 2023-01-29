@@ -1024,53 +1024,6 @@ spec:
       name: grafana-test
   restartPolicy: Never
 ---
-apiVersion: policy/v1beta1
-kind: PodSecurityPolicy
-metadata:
-  name: grafana
-  labels:
-    helm.sh/chart: grafana-6.42.3
-    app.kubernetes.io/name: grafana
-    app.kubernetes.io/instance: grafana
-    app.kubernetes.io/version: "9.2.0"
-    app.kubernetes.io/managed-by: Helm
-  annotations:
-    seccomp.security.alpha.kubernetes.io/allowedProfileNames: 'docker/default,runtime/default'
-    seccomp.security.alpha.kubernetes.io/defaultProfileName:  'docker/default'
-    apparmor.security.beta.kubernetes.io/allowedProfileNames: 'runtime/default'
-    apparmor.security.beta.kubernetes.io/defaultProfileName:  'runtime/default'
-spec:
-  privileged: false
-  allowPrivilegeEscalation: false
-  requiredDropCapabilities:
-      - ALL
-  volumes:
-    - 'configMap'
-    - 'emptyDir'
-    - 'projected'
-    - 'csi'
-    - 'secret'
-    - 'downwardAPI'
-    - 'persistentVolumeClaim'
-  hostNetwork: false
-  hostIPC: false
-  hostPID: false
-  runAsUser:
-    rule: 'RunAsAny'
-  seLinux:
-    rule: 'RunAsAny'
-  supplementalGroups:
-    rule: 'MustRunAs'
-    ranges:
-      - min: 1
-        max: 65535
-  fsGroup:
-    rule: 'MustRunAs'
-    ranges:
-      - min: 1
-        max: 65535
-  readOnlyRootFilesystem: false
----
 apiVersion: v1
 kind: ServiceAccount
 metadata:
